@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05070c">
+  <title>CYBER//CHALLENGE — MA // Training Module</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cyberpunk.css">
+</head>
+<body class="app-shell">
+  <div id="orientation-layer" class="orientation-layer" aria-hidden="true">
+    <div class="orientation-card">
+      <div class="hud-label">MOBILE PROTOCOL // LANDSCAPE</div>
+      <div class="device-glyph" aria-hidden="true"><div class="device-body"><div class="device-screen"></div></div><div class="rotate-arrow">↻</div></div>
+      <h1 data-glitch="ROTATE DEVICE">ROTATE DEVICE</h1>
+      <p>LANDSCAPE MODE REQUIRED</p>
+      <span>IMMERSIVE CHALLENGE INTERFACE<br>REQUIRES LANDSCAPE MODE</span>
+    </div>
+  </div>
+
+  <div class="cyber-backdrop"></div><div class="scanlines"></div><div class="noise-layer"></div>
+  <div class="hud-deco deco-top-left">TRAINING MODULE // MA<br><span>ACCESS // GRANTED</span></div>
+  <div class="hud-deco deco-top-right">SYSTEM STATUS // ONLINE<br><span>DATABASE // READY</span></div>
+  <div class="hud-deco deco-bottom-left">MODE // PRACTICE + NOTES<br><span>NODE // 0xSUBJECT</span></div>
+  <div class="hud-deco deco-bottom-right">SIGNAL // STABLE<br><span>SECURITY // NOMINAL</span></div>
+
+  <main class="screen page-screen">
+    <section class="content-wrap narrow">
+      <header class="page-heading">
+        <div class="panel-kicker">// SUBJECT DATABASE</div>
+        <h1 id="subject-title" class="glitch-title lg" data-glitch="MA // TRAINING MODULE">MA // TRAINING MODULE</h1>
+        <p>SELECT OPERATION</p>
+      </header>
+
+      <section class="resource-grid">
+        <button class="resource-card interactive-panel" data-resource="practice" type="button">
+          <div class="resource-icon">QP</div>
+          <div>
+            <span class="resource-label">OPERATION // 01</span>
+            <h2>QUESTION PRACTICE</h2>
+            <p>TEST YOUR KNOWLEDGE</p>
+            <div class="resource-meta">MODE // PRACTICE <span>STATUS // READY</span></div>
+          </div>
+          <span class="resource-arrow">↗</span>
+        </button>
+
+        <button class="resource-card interactive-panel" data-resource="notes" type="button">
+          <div class="resource-icon">NT</div>
+          <div>
+            <span class="resource-label">OPERATION // 02</span>
+            <h2>NOTES</h2>
+            <p>ACCESS KNOWLEDGE DATABASE</p>
+            <div class="resource-meta">MODE // READ <span>STATUS // READY</span></div>
+          </div>
+          <span class="resource-arrow">↗</span>
+        </button>
+      </section>
+
+      <div class="page-actions">
+        <a href="selection.html" class="hud-link">← BACK <span>// SUBJECT SELECT</span></a>
+      </div>
+    </section>
+  </main>
+
+  <div id="resource-transition" class="transition-overlay" aria-hidden="true">
+    <div class="transition-lines"></div>
+    <div id="resource-transition-text" class="transition-text">ESTABLISHING SECURE CONNECTION...</div>
+  </div>
+
+  <script>
+    window.CURRENT_SUBJECT = "MA";
+  </script>
+  <script src="effects.js"></script>
+  <script src="config.js"></script>
+  <script src="page.js"></script>
+</body>
+</html>

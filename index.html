@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05070c">
+  <meta name="description" content="Cyberpunk Study Challenge">
+  <title>CYBER//CHALLENGE — Boot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cyberpunk.css">
+</head>
+<body class="app-shell">
+  <div id="orientation-layer" class="orientation-layer" aria-hidden="true">
+    <div class="orientation-card">
+      <div class="hud-label">MOBILE PROTOCOL // LANDSCAPE</div>
+      <div class="device-glyph" aria-hidden="true">
+        <div class="device-body">
+          <div class="device-screen"></div>
+        </div>
+        <div class="rotate-arrow">↻</div>
+      </div>
+      <h1 data-glitch="ROTATE DEVICE">ROTATE DEVICE</h1>
+      <p>LANDSCAPE MODE REQUIRED</p>
+      <span>IMMERSIVE CHALLENGE INTERFACE<br>REQUIRES LANDSCAPE MODE</span>
+      <div class="hud-corners"></div>
+    </div>
+  </div>
+
+  <main id="boot-screen" class="screen boot-screen">
+    <div class="scanlines"></div>
+    <div class="noise-layer"></div>
+    <canvas id="matrix-canvas" class="matrix-canvas" aria-hidden="true"></canvas>
+    <div class="boot-console hud-frame">
+      <div class="boot-topline">
+        <span>CYBER//CHALLENGE</span>
+        <span id="boot-clock">00:00:00</span>
+      </div>
+      <div id="boot-log" class="boot-log" aria-live="polite"></div>
+      <div class="boot-progress-wrap">
+        <div class="progress-track"><div id="boot-progress" class="progress-bar"></div></div>
+        <div class="progress-readout"><span id="progress-percent">00%</span><span>NEURAL LINK</span></div>
+      </div>
+      <div id="boot-status" class="boot-status">SYSTEM INITIALIZING...</div>
+      <div class="boot-grid"></div>
+    </div>
+  </main>
+
+  <main id="challenge-screen" class="screen page-screen hidden">
+    <div class="cyber-backdrop"></div>
+    <div class="scanlines"></div>
+    <div class="noise-layer"></div>
+    <div class="hud-deco deco-top-left">CHALLENGE PROTOCOL // 01<br><span>SECURITY // 7F-02</span></div>
+    <div class="hud-deco deco-top-right">SYSTEM STATUS // ONLINE<br><span>SIGNAL // STABLE</span></div>
+    <div class="hud-deco deco-bottom-left">DATABASE // READY<br><span>ACCESS LEVEL // UNKNOWN</span></div>
+    <div class="hud-deco deco-bottom-right">NODE // 0x7A2<br><span>CHANNEL // OPEN</span></div>
+
+    <section class="hero-panel hud-frame interactive-panel">
+      <div class="panel-kicker">// INCOMING CHALLENGE</div>
+      <h1 class="glitch-title xl" data-glitch="ARE YOU READY FOR THE CHALLENGE?">ARE YOU READY FOR THE CHALLENGE?</h1>
+      <p class="hero-sub">A DIGITAL TRAINING PROTOCOL IS WAITING.</p>
+      <div class="signal-line"></div>
+
+      <div class="major-actions">
+        <button id="yes-btn" class="cyber-btn primary-btn glitch-target" type="button">
+          <span class="btn-id">[01]</span>
+          <span class="btn-main">YES</span>
+          <span class="btn-meta">ACCESS / ACCEPT</span>
+        </button>
+        <button id="no-btn" class="cyber-btn danger-edge glitch-target" type="button">
+          <span class="btn-id">[00]</span>
+          <span class="btn-main">NO</span>
+          <span class="btn-meta">ABORT / EXIT</span>
+        </button>
+      </div>
+      <div class="status-strip"><span>LATENCY // 04ms</span><span>CORE // ONLINE</span><span>VOID // WATCHING</span></div>
+    </section>
+  </main>
+
+  <div id="transition-overlay" class="transition-overlay" aria-hidden="true">
+    <div class="transition-lines"></div>
+    <div id="transition-text" class="transition-text">ACCESS GRANTED</div>
+  </div>
+
+  <script src="effects.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
