@@ -6,15 +6,15 @@
 
 window.CYBER_RESOURCES = Object.freeze({
   MA: {
-    practice: "MA_QUESTION_PRACTICE_URL",
-    notes: "MA_NOTES_URL"
+    practice: "https://drive.proton.me/urls/VYASFVHTQC#ggKBhuVw8bya",
+    notes: "https://drive.proton.me/urls/SHZ4R4RVPW#Ky6MKSYQTMsT"
   },
   FA: {
-    practice: "FA_QUESTION_PRACTICE_URL",
-    notes: "FA_NOTES_URL"
+    practice: "https://drive.proton.me/urls/Z0NVQR54Q8#DlEl5cmilpxF",
+    notes: "https://drive.proton.me/urls/PH5236PF1R#AVglMjOSaPtR"
   },
   LAW: {
-    practice: "LAW_QUESTION_PRACTICE_URL",
-    notes: "LAW_NOTES_URL"
+    practice: "https://drive.proton.me/urls/D4WZ5F7RQ8#pMi1vD3Dlq2Q",
+    notes: "https://drive.proton.me/urls/1SM9ATX1JC#vQmV7XxPBDYN"
   }
 });
