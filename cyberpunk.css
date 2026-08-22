@@ -2256,3 +2256,196 @@ a:focus-visible {
     display: none;
   }
 }
+/* =========================================================
+   SUBJECT SELECTION PAGE
+   CHROMIUM / FIREFOX SAFE SCROLLING
+   ========================================================= */
+
+.selection-screen {
+  min-height: 100svh;
+
+  height: auto;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.selection-screen .content-wrap {
+  padding-top: clamp(70px, 10vh, 120px);
+  padding-bottom: 70px;
+}
+
+
+/* =========================================================
+   SUBJECT SELECTION — LANDSCAPE
+   ========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .selection-screen {
+    height: auto;
+    min-height: 100dvh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    align-items: flex-start;
+  }
+
+  .selection-screen .content-wrap {
+    width: min(96vw, 1100px);
+
+    padding-top: 60px;
+    padding-bottom: 45px;
+  }
+
+  .selection-screen .page-heading {
+    margin-bottom: 28px;
+  }
+
+  .selection-screen .page-heading .glitch-title.lg {
+    font-size: clamp(2rem, 8vh, 4.4rem);
+  }
+
+  .selection-screen .subject-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .selection-screen .subject-card {
+    min-height: 270px;
+    padding: 20px;
+  }
+
+  .selection-screen .subject-code {
+    font-size: clamp(3.4rem, 11vh, 6rem);
+  }
+
+  .selection-screen .page-actions {
+    margin-top: 22px;
+  }
+}
+
+
+/* =========================================================
+   SHORT LANDSCAPE PHONES
+   ========================================================= */
+
+@media (max-width: 900px)
+  and (orientation: landscape)
+  and (max-height: 430px) {
+
+  .selection-screen .content-wrap {
+    padding-top: 50px;
+    padding-bottom: 35px;
+  }
+
+  .selection-screen .page-heading {
+    margin-bottom: 18px;
+  }
+
+  .selection-screen .page-heading .panel-kicker {
+    font-size: 8px;
+  }
+
+  .selection-screen .page-heading .glitch-title.lg {
+    font-size: clamp(1.8rem, 7vh, 3.6rem);
+  }
+
+  .selection-screen .page-heading p {
+    font-size: 8px;
+  }
+
+  .selection-screen .subject-grid {
+    gap: 10px;
+  }
+
+  .selection-screen .subject-card {
+    min-height: 220px;
+    padding: 16px;
+  }
+
+  .selection-screen .subject-top,
+  .selection-screen .subject-bottom {
+    font-size: 7px;
+  }
+
+  .selection-screen .subject-code {
+    font-size: clamp(3rem, 10vh, 5rem);
+  }
+}
+
+
+/* =========================================================
+   ADMIN MASTER BUTTON
+   ========================================================= */
+
+.admin-button-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 12px;
+}
+
+.admin-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 72px;
+  min-height: 26px;
+
+  padding: 5px 10px;
+
+  border: 1px solid rgba(255, 44, 247, 0.35);
+
+  background: rgba(8, 12, 18, 0.72);
+
+  color: rgba(255, 44, 247, 0.72);
+
+  font-family: var(--mono);
+
+  font-size: 9px;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  clip-path: polygon(
+    5px 0,
+    100% 0,
+    100% calc(100% - 5px),
+    calc(100% - 5px) 100%,
+    0 100%,
+    0 5px
+  );
+
+  box-shadow:
+    0 0 12px rgba(255, 44, 247, 0.04);
+
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.admin-button:hover {
+  color: var(--white);
+
+  border-color: var(--magenta);
+
+  background:
+    rgba(255, 44, 247, 0.08);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 0 18px rgba(255, 44, 247, 0.12);
+}
