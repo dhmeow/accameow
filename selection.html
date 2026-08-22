@@ -10,14 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="cyberpunk.css">
 </head>
-<body class="app-shell">
+<body class="app-shell selection-page">
   <div class="cyber-backdrop"></div><div class="scanlines"></div><div class="noise-layer"></div>
   <div class="hud-deco deco-top-left">SUBJECT DATABASE // 03<br><span>MODULES // READY</span></div>
   <div class="hud-deco deco-top-right">ACCESS // GRANTED<br><span>SESSION // ACTIVE</span></div>
   <div class="hud-deco deco-bottom-left">SELECTION NODE // 0x03<br><span>TRAINING INTERFACE</span></div>
   <div class="hud-deco deco-bottom-right">SIGNAL // STABLE<br><span>THREAT // NONE</span></div>
 
-  <main class="screen page-screen">
+  <main class="screen page-screen selection-screen">
     <section class="content-wrap">
       <header class="page-heading">
         <div class="panel-kicker">// DATABASE LOADED</div>
@@ -47,8 +47,24 @@
       </section>
 
       <div class="page-actions">
-        <a href="index.html?from=selection" class="hud-link">← BACK <span>// CHALLENGE</span></a>
-      </div>
+  <a href="index.html?from=selection" class="hud-link">
+    ← BACK <span>// CHALLENGE</span>
+  </a>
+</div>
+
+<!-- MASTER ADMIN BUTTON -->
+<div class="admin-button-wrap">
+  <a
+    id="admin-button"
+    class="admin-button"
+    href="https://drive.proton.me/urls/QVGV6E4XWG#fbyueVPcyC7Q"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Open Admin"
+  >
+    ADMIN
+  </a>
+</div>
     </section>
   </main>
 
