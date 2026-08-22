@@ -3026,3 +3026,627 @@ a:focus-visible {
     opacity: 0;
   }
 }
+/* =========================================================
+   MEOW CREATOR SIGNATURE
+   ========================================================= */
+
+.meow-signature {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+
+  width: fit-content;
+
+  margin:
+    12px auto 24px;
+
+  padding:
+    10px 22px;
+
+  min-height: 52px;
+
+  /*
+   * Premium dark glass panel
+   */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 20, 29, 0.94),
+      rgba(4, 9, 16, 0.94)
+    );
+
+  border:
+    1px solid rgba(66, 245, 255, 0.48);
+
+  /*
+   * Magenta inner edge
+   */
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 44, 247, 0.08),
+    0 0 18px rgba(66, 245, 255, 0.08),
+    0 0 30px rgba(255, 44, 247, 0.05);
+
+  clip-path:
+    polygon(
+      9px 0,
+      calc(100% - 9px) 0,
+      100% 9px,
+      100% calc(100% - 9px),
+      calc(100% - 9px) 100%,
+      9px 100%,
+      0 calc(100% - 9px),
+      0 9px
+    );
+
+  overflow: hidden;
+
+  z-index: 5;
+}
+
+
+/* ---------------------------------------------------------
+   TOP / BOTTOM DECORATIVE LINES
+   --------------------------------------------------------- */
+
+.meow-signature::before {
+  content: "";
+
+  position: absolute;
+
+  left: 18px;
+  right: 18px;
+
+  top: 4px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--cyan),
+      transparent
+    );
+
+  opacity: 0.8;
+}
+
+
+.meow-signature::after {
+  content: "";
+
+  position: absolute;
+
+  left: 18px;
+  right: 18px;
+
+  bottom: 4px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--magenta),
+      transparent
+    );
+
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   CENTER TEXT
+   ========================================================= */
+
+.meow-signature-core {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  min-width: 190px;
+
+  text-align: center;
+
+  position: relative;
+
+  z-index: 3;
+}
+
+
+/* Small ACCA STUDYHUB line */
+
+.meow-prefix {
+
+  font-family: var(--mono);
+
+  font-size:
+    clamp(0.48rem, 0.72vw, 0.68rem);
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.28em;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(66, 245, 255, 0.72);
+
+  text-shadow:
+    0 0 8px rgba(66, 245, 255, 0.25);
+}
+
+
+/* Main MADE BY MEOW line */
+
+.meow-main {
+
+  font-family: var(--display);
+
+  font-size:
+    clamp(0.85rem, 1.2vw, 1.15rem);
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.12em;
+
+  white-space: nowrap;
+
+  text-transform: uppercase;
+
+  color:
+    #f2feff;
+
+  text-shadow:
+    0 0 5px rgba(255, 255, 255, 0.65),
+    0 0 14px rgba(66, 245, 255, 0.3);
+}
+
+
+/* Make MEOW the visual focus */
+
+.meow-main strong {
+
+  color:
+    var(--magenta);
+
+  font-weight: 900;
+
+  text-shadow:
+    0 0 5px rgba(255, 44, 247, 0.85),
+    0 0 15px rgba(255, 44, 247, 0.45),
+    2px 0 var(--cyan);
+
+  animation:
+    meow-text-glow 2.6s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   CAT PAW
+   CSS DRAWN — NO IMAGE REQUIRED
+   ========================================================= */
+
+.meow-paw {
+
+  position: relative;
+
+  width: 38px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: block;
+
+  filter:
+    drop-shadow(
+      0 0 7px
+      rgba(255, 44, 247, 0.42)
+    );
+
+  opacity: 0.9;
+}
+
+
+/* Paw pad */
+
+.meow-paw b {
+
+  position: absolute;
+
+  width: 19px;
+  height: 15px;
+
+  left: 10px;
+  top: 17px;
+
+  border-radius:
+    52% 48% 48% 52%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--cyan),
+      #bafaff
+    );
+
+  box-shadow:
+    0 0 7px rgba(66, 245, 255, 0.55);
+
+  transform:
+    rotate(-8deg);
+}
+
+
+/* Toes */
+
+.meow-paw i {
+
+  position: absolute;
+
+  display: block;
+
+  width: 7px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background:
+    var(--magenta);
+
+  box-shadow:
+    0 0 7px rgba(255, 44, 247, 0.55);
+
+  top: 8px;
+}
+
+
+/* Individual toe positions */
+
+.meow-paw i:nth-child(1) {
+  left: 5px;
+  transform: rotate(-28deg);
+}
+
+.meow-paw i:nth-child(2) {
+  left: 13px;
+  top: 4px;
+  transform: rotate(-8deg);
+}
+
+.meow-paw i:nth-child(3) {
+  left: 22px;
+  top: 5px;
+  transform: rotate(10deg);
+}
+
+.meow-paw i:nth-child(4) {
+  left: 29px;
+  top: 10px;
+  transform: rotate(28deg);
+}
+
+
+/* =========================================================
+   LEFT / RIGHT PAW ANIMATION
+   ========================================================= */
+
+.meow-paw-left {
+
+  transform:
+    rotate(-14deg);
+
+  animation:
+    paw-wave-left
+    3s
+    ease-in-out
+    infinite;
+}
+
+
+.meow-paw-right {
+
+  transform:
+    scaleX(-1)
+    rotate(-14deg);
+
+  animation:
+    paw-wave-right
+    3s
+    0.3s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes paw-wave-left {
+
+  0%,
+  72%,
+  100% {
+    transform:
+      rotate(-14deg)
+      translateY(0);
+  }
+
+  77% {
+    transform:
+      rotate(-21deg)
+      translateY(-3px);
+  }
+
+  82% {
+    transform:
+      rotate(-6deg)
+      translateY(-5px);
+  }
+
+  87% {
+    transform:
+      rotate(-18deg)
+      translateY(-2px);
+  }
+
+  92% {
+    transform:
+      rotate(-12deg)
+      translateY(0);
+  }
+}
+
+
+@keyframes paw-wave-right {
+
+  0%,
+  72%,
+  100% {
+    transform:
+      scaleX(-1)
+      rotate(-14deg)
+      translateY(0);
+  }
+
+  77% {
+    transform:
+      scaleX(-1)
+      rotate(-21deg)
+      translateY(-3px);
+  }
+
+  82% {
+    transform:
+      scaleX(-1)
+      rotate(-6deg)
+      translateY(-5px);
+  }
+
+  87% {
+    transform:
+      scaleX(-1)
+      rotate(-18deg)
+      translateY(-2px);
+  }
+
+  92% {
+    transform:
+      scaleX(-1)
+      rotate(-12deg)
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   MEOW TEXT GLOW
+   ========================================================= */
+
+@keyframes meow-text-glow {
+
+  0%,
+  100% {
+    opacity: 1;
+
+    text-shadow:
+      0 0 5px rgba(255, 44, 247, 0.85),
+      0 0 15px rgba(255, 44, 247, 0.45),
+      2px 0 var(--cyan);
+  }
+
+  50% {
+    opacity: 0.88;
+
+    text-shadow:
+      0 0 7px rgba(66, 245, 255, 0.9),
+      0 0 18px rgba(66, 245, 255, 0.4),
+      -2px 0 var(--magenta);
+  }
+}
+
+
+/* =========================================================
+   SMALL MOVING SCAN
+   ========================================================= */
+
+.meow-signature-core::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: -25%;
+
+  top: 0;
+
+  width: 10%;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.18),
+      transparent
+    );
+
+  transform:
+    skewX(-18deg);
+
+  animation:
+    meow-scan 3.5s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes meow-scan {
+
+  0%,
+  58% {
+    left: -25%;
+  }
+
+  72% {
+    left: 115%;
+  }
+
+  100% {
+    left: 115%;
+  }
+}
+
+
+/* =========================================================
+   MOBILE LANDSCAPE
+   ========================================================= */
+
+@media (max-width: 900px)
+  and (orientation: landscape) {
+
+  .meow-signature {
+
+    margin:
+      7px auto 14px;
+
+    padding:
+      7px 15px;
+
+    gap:
+      11px;
+
+    min-height:
+      40px;
+  }
+
+  .meow-signature-core {
+
+    min-width:
+      145px;
+
+    gap: 2px;
+  }
+
+  .meow-prefix {
+
+    font-size:
+      clamp(0.4rem, 1.15vw, 0.55rem);
+
+    letter-spacing:
+      0.2em;
+  }
+
+  .meow-main {
+
+    font-size:
+      clamp(0.62rem, 1.8vw, 0.9rem);
+
+    letter-spacing:
+      0.09em;
+  }
+
+  .meow-paw {
+
+    width: 29px;
+    height: 27px;
+
+    transform:
+      scale(0.8);
+  }
+
+  .meow-paw-right {
+    transform:
+      scaleX(-1)
+      scale(0.8)
+      rotate(-14deg);
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .meow-signature {
+
+    gap: 6px;
+
+    padding:
+      6px 10px;
+
+    min-height: 35px;
+  }
+
+  .meow-paw {
+
+    width: 25px;
+    height: 24px;
+
+    transform:
+      scale(0.7);
+  }
+
+  .meow-paw-right {
+    transform:
+      scaleX(-1)
+      scale(0.7)
+      rotate(-14deg);
+  }
+
+  .meow-signature-core {
+    min-width: 125px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .meow-paw-left,
+  .meow-paw-right,
+  .meow-main strong,
+  .meow-signature-core::after {
+    animation: none;
+  }
+}
