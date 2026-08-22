@@ -31,18 +31,72 @@
   }
 
   /* =========================================================
-     RESOURCE CONNECTION ANIMATION
+     RESET RESOURCE TRANSITION
+     
+     IMPORTANT:
+     This fixes the browser Back-button problem.
+     
+     Chrome/Edge/Firefox may restore the previous page from
+     the BFCache with the loading overlay still visible.
      ========================================================= */
 
-  async function secureRedirect(url, subject, kind) {
+  function resetResourceTransition() {
     const overlay =
       document.getElementById("resource-transition");
 
+    if (!overlay) {
+      return;
+    }
+
+    overlay.classList.remove("active");
+
+    overlay.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    /*
+     * Remove inline styles that were added while the
+     * connection animation was running.
+     */
+
+    overlay.style.opacity = "";
+    overlay.style.visibility = "";
+    overlay.style.pointerEvents = "";
+    overlay.style.animation = "";
+
     const label =
-      document.getElementById("resource-transition-text");
+      document.getElementById(
+        "resource-transition-text"
+      );
+
+    if (label) {
+      label.textContent =
+        "ESTABLISHING SECURE CONNECTION...";
+    }
+  }
+
+  /* =========================================================
+     RESOURCE CONNECTION ANIMATION
+     ========================================================= */
+
+  async function secureRedirect(
+    url,
+    subject,
+    kind
+  ) {
+    const overlay =
+      document.getElementById(
+        "resource-transition"
+      );
+
+    const label =
+      document.getElementById(
+        "resource-transition-text"
+      );
 
     /* -------------------------------------------------------
-       Check URL
+       Validate URL
        ------------------------------------------------------- */
 
     if (!isConfigured(url)) {
@@ -63,6 +117,7 @@
 
         overlay.style.opacity = "1";
         overlay.style.visibility = "visible";
+        overlay.style.pointerEvents = "all";
         overlay.style.animation = "none";
 
         label.textContent =
@@ -70,14 +125,7 @@
 
         await sleep(900);
 
-        overlay.classList.remove("active");
-
-        overlay.setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
-        overlay.style = "";
+        resetResourceTransition();
       }
 
       window.alert(
@@ -89,8 +137,7 @@
     }
 
     /* -------------------------------------------------------
-       No new tab.
-       Stay on this page until the animation finishes.
+       Fallback if transition doesn't exist
        ------------------------------------------------------- */
 
     if (!overlay || !label) {
@@ -99,7 +146,7 @@
     }
 
     /* -------------------------------------------------------
-       LOCK TRANSITION ON SCREEN
+       START CONNECTION ANIMATION
        ------------------------------------------------------- */
 
     overlay.classList.add("active");
@@ -110,8 +157,8 @@
     );
 
     /*
-     * Prevent the generic transition-out animation from
-     * disappearing before our loading sequence finishes.
+     * Prevent CSS transition-out from hiding the overlay
+     * before our sequence finishes.
      */
 
     overlay.style.opacity = "1";
@@ -174,7 +221,7 @@
     await sleep(250);
 
     /*
-     * Navigate the CURRENT TAB.
+     * Navigate in the SAME TAB.
      */
 
     window.location.assign(url);
@@ -184,165 +231,223 @@
      DOM READY
      ========================================================= */
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    /* =======================================================
-       CYBER EFFECTS
-       ======================================================= */
+      /*
+       * Always start with a clean transition state.
+       */
 
-    CyberEffects?.orientationGate?.();
-    CyberEffects?.attachGlitchPulse?.();
-    CyberEffects?.attachMagneticCards?.();
-    CyberEffects?.attachButtonNoise?.();
+      resetResourceTransition();
 
-    /* =======================================================
-       SUBJECT RESOURCE BUTTONS
-       ======================================================= */
+      /* =====================================================
+         CYBER EFFECTS
+         ===================================================== */
 
-    const subject = getSubject();
+      CyberEffects?.orientationGate?.();
+      CyberEffects?.attachGlitchPulse?.();
+      CyberEffects?.attachMagneticCards?.();
+      CyberEffects?.attachButtonNoise?.();
 
-    if (
-      subject &&
-      window.CYBER_RESOURCES?.[subject]
-    ) {
+      /* =====================================================
+         SUBJECT RESOURCE BUTTONS
+         ===================================================== */
 
-      document
-        .querySelectorAll("[data-resource]")
-        .forEach((button) => {
+      const subject =
+        getSubject();
 
-          button.addEventListener(
+      if (
+        subject &&
+        window.CYBER_RESOURCES?.[subject]
+      ) {
+
+        document
+          .querySelectorAll(
+            "[data-resource]"
+          )
+          .forEach((button) => {
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                const kind =
+                  button.dataset.resource;
+
+                const url =
+                  window.CYBER_RESOURCES[
+                    subject
+                  ][kind];
+
+                secureRedirect(
+                  url,
+                  subject,
+                  kind
+                );
+
+              }
+            );
+
+          });
+      }
+
+      /* =====================================================
+         MASTER ADMIN BUTTON
+         ===================================================== */
+
+      const adminButton =
+        document.getElementById(
+          "admin-button"
+        );
+
+      if (adminButton) {
+
+        if (
+          window.ADMIN_URL &&
+          !String(
+            window.ADMIN_URL
+          ).includes("_URL")
+        ) {
+
+          adminButton.href =
+            window.ADMIN_URL;
+
+        } else {
+
+          adminButton.addEventListener(
             "click",
-            () => {
+            (event) => {
 
-              const kind =
-                button.dataset.resource;
+              event.preventDefault();
 
-              const url =
-                window.CYBER_RESOURCES[
-                  subject
-                ][kind];
-
-              secureRedirect(
-                url,
-                subject,
-                kind
+              window.alert(
+                "Replace ADMIN_URL in config.js with your admin website URL."
               );
 
             }
           );
+        }
+      }
+
+      /* =====================================================
+         INTERNAL HTML PAGE TRANSITIONS
+         ===================================================== */
+
+      document
+        .querySelectorAll(
+          'a[href$=".html"]'
+        )
+        .forEach((link) => {
+
+          link.addEventListener(
+            "click",
+            (event) => {
+
+              /*
+               * Allow modifier-clicks to work normally.
+               */
+
+              if (
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+              ) {
+                return;
+              }
+
+              const href =
+                link.getAttribute("href");
+
+              if (
+                !href ||
+                href.startsWith("#")
+              ) {
+                return;
+              }
+
+              event.preventDefault();
+
+              const transition =
+                document.createElement(
+                  "div"
+                );
+
+              transition.className =
+                "transition-overlay active";
+
+              transition.innerHTML = `
+                <div class="transition-lines"></div>
+
+                <div class="transition-text">
+                  MODE SWITCHING...
+                </div>
+              `;
+
+              document.body.appendChild(
+                transition
+              );
+
+              setTimeout(() => {
+
+                window.location.href =
+                  href;
+
+              }, 350);
+
+            }
+          );
         });
+
     }
+  );
 
-    /* =======================================================
-       MASTER ADMIN BUTTON
-       ======================================================= */
+  /* =========================================================
+     BROWSER BACK / FORWARD / BFCache FIX
+     ========================================================= */
 
-    const adminButton =
-      document.getElementById(
-        "admin-button"
-      );
+  window.addEventListener(
+    "pageshow",
+    () => {
 
-    if (adminButton) {
+      /*
+       * This fires when the page is:
+       *
+       * - normally loaded
+       * - restored from BFCache
+       * - returned to using the browser Back button
+       *
+       * Therefore the resource overlay is always reset.
+       */
+
+      resetResourceTransition();
+
+    }
+  );
+
+  /* =========================================================
+     PAGE VISIBILITY FIX
+     ========================================================= */
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+
+      /*
+       * When returning to this page from another tab/page,
+       * make sure the temporary transition isn't stuck.
+       */
 
       if (
-        window.ADMIN_URL &&
-        !String(
-          window.ADMIN_URL
-        ).includes("_URL")
+        document.visibilityState === "visible"
       ) {
 
-        adminButton.href =
-          window.ADMIN_URL;
+        resetResourceTransition();
 
-      } else {
-
-        adminButton.addEventListener(
-          "click",
-          (event) => {
-
-            event.preventDefault();
-
-            window.alert(
-              "Replace ADMIN_URL in config.js with your admin website URL."
-            );
-
-          }
-        );
       }
+
     }
-
-    /* =======================================================
-       INTERNAL HTML PAGE TRANSITIONS
-       ======================================================= */
-
-    document
-      .querySelectorAll(
-        'a[href$=".html"]'
-      )
-      .forEach((link) => {
-
-        link.addEventListener(
-          "click",
-          (event) => {
-
-            /*
-             * Preserve normal modifier-click behavior.
-             */
-
-            if (
-              event.metaKey ||
-              event.ctrlKey ||
-              event.shiftKey ||
-              event.altKey
-            ) {
-              return;
-            }
-
-            const href =
-              link.getAttribute("href");
-
-            if (
-              !href ||
-              href.startsWith("#")
-            ) {
-              return;
-            }
-
-            event.preventDefault();
-
-            /* -------------------------------------------------
-               Internal page transition
-               ------------------------------------------------- */
-
-            const transition =
-              document.createElement("div");
-
-            transition.className =
-              "transition-overlay active";
-
-            transition.style.opacity = "1";
-            transition.style.visibility = "visible";
-            transition.style.animation = "none";
-
-            transition.innerHTML = `
-              <div class="transition-lines"></div>
-
-              <div class="transition-text">
-                MODE SWITCHING...
-              </div>
-            `;
-
-            document.body.appendChild(
-              transition
-            );
-
-            setTimeout(() => {
-              window.location.href = href;
-            }, 350);
-          }
-        );
-      });
-
-  });
+  );
 
 })();
