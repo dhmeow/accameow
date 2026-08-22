@@ -45,6 +45,36 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+   /* =========================================================
+   MASTER ADMIN BUTTON
+   ========================================================= */
+
+const adminButton = document.getElementById("admin-button");
+
+if (adminButton) {
+
+  if (
+    window.ADMIN_URL &&
+    !String(window.ADMIN_URL).includes("_URL")
+  ) {
+
+    adminButton.href = window.ADMIN_URL;
+
+  } else {
+
+    adminButton.addEventListener("click", (event) => {
+
+      event.preventDefault();
+
+      window.alert(
+        "Replace ADMIN_URL in config.js with your admin website URL."
+      );
+
+    });
+
+  }
+
+}
     CyberEffects?.orientationGate?.();
     CyberEffects?.attachGlitchPulse?.();
     CyberEffects?.attachMagneticCards?.();
