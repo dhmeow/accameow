@@ -31,7 +31,7 @@
   }
 
   /* =========================================================
-     RESOURCE LOADING + CYBERPUNK TRANSITION
+     RESOURCE CONNECTION ANIMATION
      ========================================================= */
 
   async function secureRedirect(url, subject, kind) {
@@ -42,81 +42,82 @@
       document.getElementById("resource-transition-text");
 
     /* -------------------------------------------------------
-       Validate URL first
+       Check URL
        ------------------------------------------------------- */
 
     if (!isConfigured(url)) {
-      if (overlay && label) {
-        overlay.classList.add("active");
-        overlay.setAttribute("aria-hidden", "false");
-
-        label.textContent =
-          "URL PLACEHOLDER // CONFIG REQUIRED";
-
-        await sleep(400);
-
-        overlay.classList.remove("active");
-        overlay.setAttribute("aria-hidden", "true");
-      }
-
-      const urlName =
+      const resourceName =
         `${subject}_${
           kind === "practice"
             ? "QUESTION_PRACTICE"
             : "NOTES"
         }_URL`;
 
+      if (overlay && label) {
+        overlay.classList.add("active");
+
+        overlay.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+        overlay.style.opacity = "1";
+        overlay.style.visibility = "visible";
+        overlay.style.animation = "none";
+
+        label.textContent =
+          "URL PLACEHOLDER // CONFIG REQUIRED";
+
+        await sleep(900);
+
+        overlay.classList.remove("active");
+
+        overlay.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+        overlay.style = "";
+      }
+
       window.alert(
         `No real URL is configured yet.\n\n` +
-        `Set ${urlName} in config.js.`
+        `Set ${resourceName} in config.js.`
       );
 
       return;
     }
 
     /* -------------------------------------------------------
-       OPEN THE TARGET IMMEDIATELY
-       
-       This starts loading the external website as soon as
-       the user clicks, while our animation plays.
-       ------------------------------------------------------- */
-
-    let targetWindow = null;
-
-    try {
-      targetWindow = window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
-      );
-    } catch (error) {
-      targetWindow = null;
-    }
-
-    const popupBlocked = !targetWindow;
-
-    /* -------------------------------------------------------
-       Fallback if transition HTML does not exist
+       No new tab.
+       Stay on this page until the animation finishes.
        ------------------------------------------------------- */
 
     if (!overlay || !label) {
-      if (popupBlocked) {
-        window.location.assign(url);
-      } else {
-        try {
-          targetWindow.focus();
-        } catch (_) {}
-      }
-
+      window.location.assign(url);
       return;
     }
 
     /* -------------------------------------------------------
-       SHOW CONNECTION SCREEN
+       LOCK TRANSITION ON SCREEN
        ------------------------------------------------------- */
 
     overlay.classList.add("active");
-    overlay.setAttribute("aria-hidden", "false");
+
+    overlay.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    /*
+     * Prevent the generic transition-out animation from
+     * disappearing before our loading sequence finishes.
+     */
+
+    overlay.style.opacity = "1";
+    overlay.style.visibility = "visible";
+    overlay.style.pointerEvents = "all";
+    overlay.style.animation = "none";
 
     /* -------------------------------------------------------
        PHASE 1
@@ -125,7 +126,7 @@
     label.textContent =
       "ESTABLISHING SECURE CONNECTION...";
 
-    await sleep(350);
+    await sleep(450);
 
     /* -------------------------------------------------------
        PHASE 2
@@ -134,7 +135,7 @@
     label.textContent =
       `SCANNING NODE // 0x${randomHex(6)}`;
 
-    await sleep(300);
+    await sleep(400);
 
     /* -------------------------------------------------------
        PHASE 3
@@ -143,7 +144,7 @@
     label.textContent =
       "RESOURCE LOCATED";
 
-    await sleep(300);
+    await sleep(350);
 
     /* -------------------------------------------------------
        PHASE 4
@@ -152,7 +153,7 @@
     label.textContent =
       "SECURE CHANNEL ESTABLISHED";
 
-    await sleep(300);
+    await sleep(400);
 
     /* -------------------------------------------------------
        PHASE 5
@@ -161,45 +162,22 @@
     label.textContent =
       "ACCESSING DATABASE...";
 
-    await sleep(350);
+    await sleep(450);
 
     /* -------------------------------------------------------
-       FINAL PHASE
+       FINAL
        ------------------------------------------------------- */
 
     label.textContent =
       "ACCESS GRANTED";
 
-    await sleep(300);
+    await sleep(250);
 
-    /* -------------------------------------------------------
-       POPUP BLOCKED FALLBACK
-       ------------------------------------------------------- */
+    /*
+     * Navigate the CURRENT TAB.
+     */
 
-    if (popupBlocked) {
-      window.location.assign(url);
-      return;
-    }
-
-    /* -------------------------------------------------------
-       TRY TO FOCUS THE NEW TAB
-       ------------------------------------------------------- */
-
-    try {
-      targetWindow.focus();
-    } catch (_) {
-      /*
-       * Some browsers prevent scripts from changing focus.
-       * The target page is still already loading.
-       */
-    }
-
-    /* -------------------------------------------------------
-       REMOVE TRANSITION
-       ------------------------------------------------------- */
-
-    overlay.classList.remove("active");
-    overlay.setAttribute("aria-hidden", "true");
+    window.location.assign(url);
   }
 
   /* =========================================================
@@ -230,24 +208,28 @@
 
       document
         .querySelectorAll("[data-resource]")
-        .forEach((btn) => {
+        .forEach((button) => {
 
-          btn.addEventListener("click", () => {
+          button.addEventListener(
+            "click",
+            () => {
 
-            const kind =
-              btn.dataset.resource;
+              const kind =
+                button.dataset.resource;
 
-            const url =
-              window.CYBER_RESOURCES[subject][kind];
+              const url =
+                window.CYBER_RESOURCES[
+                  subject
+                ][kind];
 
-            secureRedirect(
-              url,
-              subject,
-              kind
-            );
+              secureRedirect(
+                url,
+                subject,
+                kind
+              );
 
-          });
-
+            }
+          );
         });
     }
 
@@ -256,13 +238,17 @@
        ======================================================= */
 
     const adminButton =
-      document.getElementById("admin-button");
+      document.getElementById(
+        "admin-button"
+      );
 
     if (adminButton) {
 
       if (
         window.ADMIN_URL &&
-        !String(window.ADMIN_URL).includes("_URL")
+        !String(
+          window.ADMIN_URL
+        ).includes("_URL")
       ) {
 
         adminButton.href =
@@ -290,75 +276,71 @@
        ======================================================= */
 
     document
-      .querySelectorAll('a[href$=".html"]')
+      .querySelectorAll(
+        'a[href$=".html"]'
+      )
       .forEach((link) => {
 
-        link.addEventListener("click", (event) => {
+        link.addEventListener(
+          "click",
+          (event) => {
 
-          /*
-           * Allow normal browser behavior for:
-           * Ctrl + Click
-           * Cmd + Click
-           * Shift + Click
-           * Alt + Click
-           */
+            /*
+             * Preserve normal modifier-click behavior.
+             */
 
-          if (
-            event.metaKey ||
-            event.ctrlKey ||
-            event.shiftKey ||
-            event.altKey
-          ) {
-            return;
+            if (
+              event.metaKey ||
+              event.ctrlKey ||
+              event.shiftKey ||
+              event.altKey
+            ) {
+              return;
+            }
+
+            const href =
+              link.getAttribute("href");
+
+            if (
+              !href ||
+              href.startsWith("#")
+            ) {
+              return;
+            }
+
+            event.preventDefault();
+
+            /* -------------------------------------------------
+               Internal page transition
+               ------------------------------------------------- */
+
+            const transition =
+              document.createElement("div");
+
+            transition.className =
+              "transition-overlay active";
+
+            transition.style.opacity = "1";
+            transition.style.visibility = "visible";
+            transition.style.animation = "none";
+
+            transition.innerHTML = `
+              <div class="transition-lines"></div>
+
+              <div class="transition-text">
+                MODE SWITCHING...
+              </div>
+            `;
+
+            document.body.appendChild(
+              transition
+            );
+
+            setTimeout(() => {
+              window.location.href = href;
+            }, 350);
           }
-
-          const href =
-            link.getAttribute("href");
-
-          if (
-            !href ||
-            href.startsWith("#")
-          ) {
-            return;
-          }
-
-          event.preventDefault();
-
-          /* -------------------------------------------------
-             Create transition overlay
-             ------------------------------------------------- */
-
-          const transition =
-            document.createElement("div");
-
-          transition.className =
-            "transition-overlay active";
-
-          transition.innerHTML = `
-            <div class="transition-lines"></div>
-
-            <div class="transition-text">
-              MODE SWITCHING...
-            </div>
-          `;
-
-          document.body.appendChild(
-            transition
-          );
-
-          /* -------------------------------------------------
-             Navigate after short cinematic transition
-             ------------------------------------------------- */
-
-          setTimeout(() => {
-
-            window.location.href =
-              href;
-
-          }, 330);
-
-        });
-
+        );
       });
 
   });
