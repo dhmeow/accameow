@@ -1,3 +1,6 @@
+window.ADMIN_URL = "https://drive.proton.me/urls/QVGV6E4XWG#fbyueVPcyC7Q";
+
+
 /*
   CENTRALIZED RESOURCE URL CONFIGURATION
   Replace ONLY the six placeholder values below with your real URLs.
