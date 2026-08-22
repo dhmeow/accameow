@@ -436,16 +436,491 @@ a:focus-visible {
     0 0 22px rgba(66, 245, 255, 0.18);
 }
 
-.glitch-title.xl {
-  font-size: clamp(2.2rem, 6.6vw, 6.9rem);
+/* =========================================================
+   HERO TITLE — MAJOR EMPHASIS
+   ========================================================= */
 
-  line-height: 0.98;
+#challenge-screen .glitch-title.xl {
+  position: relative;
 
-  max-width: 1000px;
+  width: 100%;
+  max-width: 1100px;
 
-  margin-inline: auto;
+  margin:
+    18px auto
+    20px;
+
+  font-family: var(--display);
+
+  font-size:
+    clamp(3.4rem, 7vw, 7.8rem);
+
+  font-weight: 900;
+
+  line-height: 0.88;
+
+  letter-spacing: 0.035em;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  color: #f1fdff;
+
+  /*
+   * Layered cyberpunk lighting
+   */
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(66, 245, 255, 0.55),
+    0 0 30px rgba(66, 245, 255, 0.25),
+    5px 0 0 rgba(255, 44, 247, 0.16),
+    -5px 0 0 rgba(66, 245, 255, 0.16);
+
+  /*
+   * Makes the title feel like a display object
+   */
+  filter:
+    drop-shadow(0 0 18px rgba(66, 245, 255, 0.12));
+
+  /*
+   * Slight visual compression gives it a futuristic
+   * display-system appearance.
+   */
+  transform:
+    scaleX(0.98);
+
+  z-index: 2;
 }
 
+
+/* =========================================================
+   TITLE GLITCH LAYERS
+   ========================================================= */
+
+#challenge-screen .glitch-title.xl::before,
+#challenge-screen .glitch-title.xl::after {
+
+  content: attr(data-glitch);
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  z-index: -1;
+}
+
+
+/* MAGENTA GLITCH */
+
+#challenge-screen .glitch-title.xl::before {
+
+  color: var(--magenta);
+
+  transform:
+    translate(5px, -2px);
+
+  text-shadow:
+    0 0 14px rgba(255, 44, 247, 0.5);
+
+  clip-path:
+    polygon(
+      0 8%,
+      100% 8%,
+      100% 20%,
+      0 20%
+    );
+}
+
+
+/* CYAN GLITCH */
+
+#challenge-screen .glitch-title.xl::after {
+
+  color: var(--cyan);
+
+  transform:
+    translate(-5px, 2px);
+
+  text-shadow:
+    0 0 14px rgba(66, 245, 255, 0.5);
+
+  clip-path:
+    polygon(
+      0 70%,
+      100% 70%,
+      100% 84%,
+      0 84%
+    );
+}
+
+
+/* =========================================================
+   MORE AGGRESSIVE GLITCH BURSTS
+   ========================================================= */
+
+#challenge-screen .glitch-title.xl.glitch-pulse::before {
+
+  opacity: 0.9;
+
+  animation:
+    hero-glitch-top
+    0.13s
+    steps(2)
+    infinite;
+}
+
+
+#challenge-screen .glitch-title.xl.glitch-pulse::after {
+
+  opacity: 0.9;
+
+  animation:
+    hero-glitch-bottom
+    0.16s
+    steps(2)
+    infinite;
+}
+
+
+@keyframes hero-glitch-top {
+
+  0% {
+    transform:
+      translate(3px, -1px);
+    clip-path:
+      inset(8% 0 76% 0);
+  }
+
+  25% {
+    transform:
+      translate(-7px, 1px);
+    clip-path:
+      inset(14% 0 61% 0);
+  }
+
+  50% {
+    transform:
+      translate(6px, -2px);
+    clip-path:
+      inset(27% 0 58% 0);
+  }
+
+  75% {
+    transform:
+      translate(-3px, 1px);
+    clip-path:
+      inset(5% 0 70% 0);
+  }
+
+  100% {
+    transform:
+      translate(3px, -1px);
+    clip-path:
+      inset(8% 0 76% 0);
+  }
+}
+
+
+@keyframes hero-glitch-bottom {
+
+  0% {
+    transform:
+      translate(-3px, 2px);
+    clip-path:
+      inset(70% 0 12% 0);
+  }
+
+  25% {
+    transform:
+      translate(7px, -1px);
+    clip-path:
+      inset(59% 0 25% 0);
+  }
+
+  50% {
+    transform:
+      translate(-6px, 2px);
+    clip-path:
+      inset(74% 0 6% 0);
+  }
+
+  75% {
+    transform:
+      translate(4px, -2px);
+    clip-path:
+      inset(63% 0 18% 0);
+  }
+
+  100% {
+    transform:
+      translate(-3px, 2px);
+    clip-path:
+      inset(70% 0 12% 0);
+  }
+}
+
+
+/* =========================================================
+   HERO SUBTITLE — STRONGER SECONDARY IDENTITY
+   ========================================================= */
+
+#challenge-screen .hero-sub {
+
+  position: relative;
+
+  display: inline-block;
+
+  margin:
+    6px auto
+    22px;
+
+  padding:
+    8px 22px;
+
+  font-family: var(--mono);
+
+  font-size:
+    clamp(0.78rem, 1.35vw, 1.15rem);
+
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  letter-spacing:
+    0.22em;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(211, 251, 255, 0.92);
+
+  /*
+   * Cyan glow + subtle magenta edge
+   */
+  text-shadow:
+    0 0 6px rgba(66, 245, 255, 0.7),
+    0 0 16px rgba(66, 245, 255, 0.3);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(66, 245, 255, 0.045),
+      rgba(255, 44, 247, 0.045),
+      transparent
+    );
+
+  border-top:
+    1px solid rgba(66, 245, 255, 0.25);
+
+  border-bottom:
+    1px solid rgba(255, 44, 247, 0.22);
+
+  box-shadow:
+    0 0 18px rgba(66, 245, 255, 0.035),
+    inset 0 0 14px rgba(66, 245, 255, 0.025);
+
+  clip-path:
+    polygon(
+      8px 0,
+      calc(100% - 8px) 0,
+      100% 50%,
+      calc(100% - 8px) 100%,
+      8px 100%,
+      0 50%
+    );
+}
+
+
+/* =========================================================
+   SUBTITLE DECORATIVE LIGHT LINE
+   ========================================================= */
+
+#challenge-screen .hero-sub::before,
+#challenge-screen .hero-sub::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+
+  width: 55px;
+
+  height: 1px;
+
+  transform:
+    translateY(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--cyan)
+    );
+
+  box-shadow:
+    0 0 8px var(--cyan);
+}
+
+
+#challenge-screen .hero-sub::before {
+
+  right: 100%;
+
+  margin-right: 14px;
+}
+
+
+#challenge-screen .hero-sub::after {
+
+  left: 100%;
+
+  margin-left: 14px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--magenta),
+      transparent
+    );
+
+  box-shadow:
+    0 0 8px var(--magenta);
+}
+
+
+/* =========================================================
+   SUBTITLE SCAN EFFECT
+   ========================================================= */
+
+#challenge-screen .hero-sub {
+  overflow: hidden;
+}
+
+
+#challenge-screen .hero-sub span {
+  position: relative;
+}
+
+
+#challenge-screen .hero-sub::marker {
+  display: none;
+}
+
+
+/* =========================================================
+   HERO KICKER
+   ALSO MAKE THE SMALL LINE MORE PREMIUM
+   ========================================================= */
+
+#challenge-screen .panel-kicker {
+
+  margin-bottom: 5px;
+
+  font-family: var(--mono);
+
+  font-size:
+    clamp(0.58rem, 0.9vw, 0.78rem);
+
+  font-weight: 600;
+
+  letter-spacing:
+    0.32em;
+
+  color:
+    rgba(66, 245, 255, 0.85);
+
+  text-shadow:
+    0 0 9px rgba(66, 245, 255, 0.35);
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DESKTOP TITLE
+   ========================================================= */
+
+@media (min-width: 1100px) {
+
+  #challenge-screen .glitch-title.xl {
+    font-size:
+      clamp(4.2rem, 6vw, 7.8rem);
+
+    letter-spacing:
+      0.045em;
+  }
+
+  #challenge-screen .hero-sub {
+    font-size: 1rem;
+
+    letter-spacing:
+      0.26em;
+  }
+}
+
+
+/* =========================================================
+   MOBILE LANDSCAPE
+   ========================================================= */
+
+@media (max-width: 900px)
+  and (orientation: landscape) {
+
+  #challenge-screen .glitch-title.xl {
+
+    font-size:
+      clamp(2.2rem, 8vh, 4.6rem);
+
+    line-height:
+      0.9;
+
+    letter-spacing:
+      0.025em;
+  }
+
+  #challenge-screen .hero-sub {
+
+    font-size:
+      clamp(0.6rem, 1.8vw, 0.85rem);
+
+    letter-spacing:
+      0.16em;
+
+    padding:
+      6px 14px;
+  }
+
+  #challenge-screen .hero-sub::before,
+  #challenge-screen .hero-sub::after {
+    width: 30px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  #challenge-screen .glitch-title.xl::before,
+  #challenge-screen .glitch-title.xl::after {
+    animation: none !important;
+  }
+}
 .glitch-title.lg {
   font-size: clamp(2.25rem, 5vw, 5.1rem);
 
