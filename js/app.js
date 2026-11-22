@@ -67,7 +67,7 @@
             <span class="home-credit-rule"></span>
           </section>
         </main>
-        <footer class="home-dark-footer"><span>MA STUDY RESOURCES</span><span>itsonlymmmm lol <i></i> ALL CREDITS TO MEOW</span></footer>
+        <footer class="home-dark-footer"><span>MA STUDY RESOURCES</span><span>ITSONLYMMMM (LOL) <i></i> ALL CREDITS TO MEOW</span></footer>
       </div>`;
   }
 
@@ -193,7 +193,7 @@
   function renderFeedback(question, attempt) {
     let answerSummary = '';
     if (question.type === 'numeric') {
-      answerSummary = `Correct answer: ${question.correct?.[0] ?? question.answerText ?? 'See source PDF'}`;
+      answerSummary = `Correct answer: ${question.correct?.[0] ?? question.answerText ?? }`;
     }
     const explanation = String(question.explanation || '').trim();
     return `${explanation ? `<div class="explanation-box"><div class="explanation-copy">${lines(explanation)}</div></div>` : ''}
