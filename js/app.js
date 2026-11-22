@@ -46,7 +46,7 @@
     app.innerHTML = `
       <div class="home-dark-shell">
         <header class="home-topbar">
-          <span class="home-topbar-label">ACCA <i></i> MANAGEMENT ACCOUNTING</span>
+          <span class="home-topbar-label">ACCA <i></i> MANAGEMENT ACCOUNTING (FMA) </span>
           <span class="home-topbar-count">${chapters.length} CHAPTERS <b>·</b> ${totalQuestions} QUESTIONS</span>
         </header>
         <main class="home-dark-main">
@@ -62,12 +62,12 @@
             <div class="home-glass-index" aria-hidden="true"><span>01 — 26</span><strong>MA</strong><i></i><small>STUDY<br>RESOURCES</small></div>
           </section>
           <section class="home-credit-plate" aria-label="Creator credits">
-            <span class="home-credit-overline">WITH RESPECT & CREDIT TO THE ORIGINAL CREATOR</span>
+            <span class="home-credit-overline">WITH CREDIT TO THE ORIGINAL CREATOR</span>
             <div class="home-credit-name"><span>ALL CREDITS GO TO</span><strong>MEOW<span>®</span></strong></div>
             <span class="home-credit-rule"></span>
           </section>
         </main>
-        <footer class="home-dark-footer"><span>MA STUDY RESOURCES</span><span>BUILT FOR PRACTICE <i></i> ALL CREDITS TO MEOW</span></footer>
+        <footer class="home-dark-footer"><span>MA STUDY RESOURCES</span><span>itsonlymmmm lol <i></i> ALL CREDITS TO MEOW</span></footer>
       </div>`;
   }
 
